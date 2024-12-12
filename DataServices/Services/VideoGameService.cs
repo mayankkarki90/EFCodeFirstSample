@@ -21,12 +21,17 @@ namespace DataServices.Services
 
         public async Task<IEnumerable<VideoGame>> GetAllAsync()
         {
-            return await _dataContext.VideoGames.ToListAsync();
+            return await _dataContext.VideoGames.Include(v => v.VideoGameDetail)
+                                                .Include(v => v.Publisher)
+                                                .ToListAsync();
         }
 
         public async Task<VideoGame> GetByCodeAsync(string code)
         {
-            return await _dataContext.VideoGames.FirstOrDefaultAsync(x => x.Code == code);
+            return await _dataContext.VideoGames
+                .Include(v => v.VideoGameDetail)
+                .Include(v => v.Publisher)
+                .FirstOrDefaultAsync(x => x.Code == code);
         }
 
         public async Task AddAsync(VideoGame videoGame)

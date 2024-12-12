@@ -9,6 +9,7 @@ namespace EFCodeFirstSample
         public AutoMapperProfile()
         {
             CreateMap<VideoGame, VideoGameDto>().ReverseMap();
+            CreateMap<VideoGameDetail, VideoGameDetailDto>().ReverseMap();
             CreateMap<Publisher, PublisherDto>().ReverseMap();
         }
     }
