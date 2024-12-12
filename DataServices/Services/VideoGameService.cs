@@ -23,5 +23,16 @@ namespace DataServices.Services
         {
             return await _dataContext.VideoGames.ToListAsync();
         }
+
+        public async Task<VideoGame> GetByCodeAsync(string code)
+        {
+            return await _dataContext.VideoGames.FirstOrDefaultAsync(x => x.Code == code);
+        }
+
+        public async Task AddAsync(VideoGame videoGame)
+        {
+            _dataContext.VideoGames.Add(videoGame);
+            await _dataContext.SaveChangesAsync();
+        }
     }
 }

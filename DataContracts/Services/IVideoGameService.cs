@@ -10,5 +10,9 @@ namespace DataContracts.Services
     public interface IVideoGameService
     {
         Task<IEnumerable<VideoGame>> GetAllAsync();
+
+        Task<VideoGame> GetByCodeAsync(string code);
+
+        Task AddAsync(VideoGame videoGame);
     }
 }
