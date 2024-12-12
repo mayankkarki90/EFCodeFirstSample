@@ -8,8 +8,10 @@ namespace EFCodeFirstSample.Dto
 
         public string Code { get; set; }
 
-        public VideoGameDetail VideoGameDetail { get; set; }
+        public VideoGameDetailDto Details { get; set; }
 
         public PublisherDto Publisher { get; set; }
+
+        public List<GenreDto> Genres { get; set; }
     }
 }

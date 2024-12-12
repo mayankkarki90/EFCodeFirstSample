@@ -15,5 +15,7 @@ namespace Data
         public DbSet<VideoGameDetail> VideoGamesDetails { get; set; }
 
         public DbSet<Publisher> Publishers { get; set; }
+
+        public DbSet<Genre> Genres { get; set; }
     }
 }

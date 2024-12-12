@@ -18,6 +18,8 @@ namespace DataContracts.Models
 
         public Publisher Publisher { get; set; }
 
-        public VideoGameDetail VideoGameDetail { get; set; }
+        public VideoGameDetail Details { get; set; }
+
+        public List<Genre> Genres{ get; set; }
     }
 }
