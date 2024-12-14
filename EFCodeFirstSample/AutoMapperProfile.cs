@@ -11,6 +11,7 @@ namespace EFCodeFirstSample
             CreateMap<VideoGame, VideoGameDto>().ReverseMap();
             CreateMap<VideoGameDetail, VideoGameDetailDto>().ReverseMap();
             CreateMap<Publisher, PublisherDto>().ReverseMap();
+            CreateMap<Genre, GenreDto>().ReverseMap();
         }
     }
 }
