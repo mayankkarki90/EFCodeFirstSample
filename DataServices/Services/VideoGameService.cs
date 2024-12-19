@@ -34,7 +34,7 @@ namespace DataServices.Services
                 .Include(v => v.Details)
                 .Include(v => v.Publisher)
                 .Include(v => v.Genres)
-                .FirstOrDefaultAsync(x => x.Code.Equals(code, StringComparison.InvariantCultureIgnoreCase));
+                .FirstOrDefaultAsync(x => x.Code == code);
         }
 
         public async Task AddAsync(VideoGame videoGame)
@@ -43,33 +43,20 @@ namespace DataServices.Services
             {
                 try
                 {
-                    var publisherId = await GetOrCreatePublisherAsync(videoGame.Publisher?.Name);
-                    videoGame.PublisherId = publisherId;
-
-                    _dataContext.Add(videoGame);
-                    await _dataContext.SaveChangesAsync();
-
-                    _dataContext.Add(new VideoGameDetail
-                    {
-                        VideoGameId = videoGame.Id,
-                        Description = videoGame.Details?.Description,
-                        ReleaseDate = videoGame.Details?.ReleaseDate,
-                    });
+                    var publisher = await GetOrCreatePublisherAsync(videoGame.Publisher.Name);
+                    videoGame.Publisher = publisher;
 
                     if (videoGame.Genres != null && videoGame.Genres.Any())
                     {
-                        foreach (var genre in videoGame.Genres)
+                        for (var i = 0; i < videoGame.Genres.Count; i++)
                         {
-                            var genreId = await GetOrCreateGenreAsync(genre.Name);
-                            _dataContext.Add(new GenreVideoGame
-                            {
-                                GenresId = genreId,
-                                VideoGamesId = videoGame.Id
-                            });
-
+                            var genre = videoGame.Genres[i];
+                            var dbGenre = await GetOrCreateGenreAsync(genre.Name);
+                            videoGame.Genres[i] = dbGenre;
                         }
                     }
 
+                    _dataContext.VideoGames.Add(videoGame);
                     await _dataContext.SaveChangesAsync();
                     await transaction.CommitAsync();
                 }
@@ -81,34 +68,32 @@ namespace DataServices.Services
             }
         }
 
-        private async Task<int> GetOrCreatePublisherAsync(string publisherName)
+        private async Task<Publisher> GetOrCreatePublisherAsync(string publisherName)
         {
             var publisher = await _dataContext.Publishers.FirstOrDefaultAsync(p =>
-                p.Name.Equals(publisherName, StringComparison.InvariantCultureIgnoreCase));
+                p.Name == publisherName);
             if (publisher == null)
             {
                 publisher = new Publisher { Name = publisherName };
-                _dataContext.Add(publisher);
+                _dataContext.Publishers.Add(publisher);
                 await _dataContext.SaveChangesAsync();
             }
 
-            return publisher.Id;
+            return publisher;
         }
 
-        private async Task<int> GetOrCreateGenreAsync(string genreName)
+        private async Task<Genre> GetOrCreateGenreAsync(string genreName)
         {
             var genre = await _dataContext.Genres.FirstOrDefaultAsync(g =>
-                g.Name.Equals(genreName, StringComparison.InvariantCultureIgnoreCase));
+                g.Name == genreName);
             if (genre == null)
             {
                 genre = new Genre { Name = genreName };
-                _dataContext.Add(genre);
+                _dataContext.Genres.Add(genre);
                 await _dataContext.SaveChangesAsync();
             }
 
-            return genre.Id;
+            return genre;
         }
-
-        
     }
 }
