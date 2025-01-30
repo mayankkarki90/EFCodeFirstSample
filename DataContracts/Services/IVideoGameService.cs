@@ -14,5 +14,9 @@ namespace DataContracts.Services
         Task<VideoGame> GetByCodeAsync(string code);
 
         Task AddAsync(VideoGame videoGame);
+
+        Task UpdateAsync(int videoGameId, VideoGame newGame);
+
+        Task DeleteAsync(int videoGameId);
     }
 }

@@ -50,7 +50,7 @@ namespace EFCodeFirstSample.Controllers
         }
 
         /// <summary>
-        /// Create new video game.
+        /// Create a new video game.
         /// </summary>
         /// <param name="videoGame">The video game.</param>
         /// <returns></returns>
@@ -61,6 +61,40 @@ namespace EFCodeFirstSample.Controllers
             var game = _mapper.Map<VideoGame>(videoGame);
             await _videoGameService.AddAsync(game);
             return CreatedAtAction("GetByCode", new { code = videoGame.Code }, videoGame);
+        }
+
+        /// <summary>
+        /// Update a video game.
+        /// </summary>
+        /// <param name="videoGame">The video game.</param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<ActionResult> PutAsync(VideoGameDto videoGame)
+        {
+            var existingGame = await _videoGameService.GetByCodeAsync(videoGame.Code);
+            if (existingGame == null)
+                return NotFound("Video game not found");
+
+            var newGame = _mapper.Map<VideoGame>(videoGame);
+            await _videoGameService.UpdateAsync(existingGame.Id, newGame);
+
+            return NoContent();
+        }
+
+        /// <summary>
+        /// Deletes a video game.
+        /// </summary>
+        /// <param name="code">The code.</param>
+        /// <returns></returns>
+        [HttpDelete("/code/{code}")]
+        public async Task<ActionResult> DeleteAsync(string code)
+        {
+            var existingGame = await _videoGameService.GetByCodeAsync(code);
+            if (existingGame == null)
+                return NotFound("Video game not found");
+
+            await _videoGameService.DeleteAsync(existingGame.Id);
+            return NoContent();
         }
     }
 }
