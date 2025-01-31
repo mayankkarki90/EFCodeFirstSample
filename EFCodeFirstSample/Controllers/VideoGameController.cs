@@ -3,6 +3,7 @@ using DataContracts.Models;
 using DataContracts.Services;
 using EFCodeFirstSample.Dto;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace EFCodeFirstSample.Controllers
 {
