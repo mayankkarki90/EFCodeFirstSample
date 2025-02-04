@@ -4,6 +4,7 @@ using DataServices.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using EFCodeFirstSample.Handlers;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -44,6 +45,10 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+//can add multiple exception handler classes here.
+//Using event chaining until an exception handler returns true, all the handler will execute
+builder.Services.AddExceptionHandler<AppExceptionHandler>();
+
 //use code to configure serilog to write to file
 //Log.Logger = new LoggerConfiguration()
 //    .MinimumLevel.Information()
@@ -65,6 +70,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseExceptionHandler(_ => { });//doesn't required any parameter to run using IExceptionHandler in .net 8
 
 app.UseHttpsRedirection();
 
