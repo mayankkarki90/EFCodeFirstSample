@@ -52,7 +52,12 @@ builder.Services.AddExceptionHandler<AppExceptionHandler>();
 //use code to configure serilog to write to file
 //Log.Logger = new LoggerConfiguration()
 //    .MinimumLevel.Information()
-//    .WriteTo.File("Logs/Log-.txt", rollingInterval:RollingInterval.Day) //serilog adds date part after file name
+//    .MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Warning)
+//    .MinimumLevel.Override("Microsoft.AspNetCore.Mvc", LogEventLevel.Warning)
+//    //.MinimumLevel.Override("Microsoft.AspNetCore.Routing", LogEventLevel.Warning)
+//    .Enrich.FromLogContext()
+//    .WriteTo.File("Logs/Log-.txt", rollingInterval: RollingInterval.Day,
+//        outputTemplate: "{Timestamp:HH:mm:ss} {RequestId,13} -[{Level:u3}] {Message} ({EventId:x8}){NewLine}{Exception}") //serilog adds date part after file name
 //    .CreateLogger();
 
 //get serilog configuration from appSettings
