@@ -1,7 +1,7 @@
 ﻿using EFCodeFirstSample.Models;
 using Microsoft.AspNetCore.Diagnostics;
 
-namespace EFCodeFirstSample.Handlers
+namespace EFCodeFirstSample.Infrastructure
 {
     /// <summary>
     /// Application exception handler to handle all unhandled exception

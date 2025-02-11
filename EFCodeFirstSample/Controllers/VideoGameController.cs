@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using DataContracts.Models;
 using DataContracts.Services;
-using EFCodeFirstSample.Dto;
+using EFCodeFirstSample.Models.Dto;
 using Microsoft.AspNetCore.Mvc;
-using Serilog;
 
 namespace EFCodeFirstSample.Controllers
 {

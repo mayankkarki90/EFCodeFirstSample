@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using DataContracts.Models;
-using EFCodeFirstSample.Dto;
+using EFCodeFirstSample.Models.Dto;
 
-namespace EFCodeFirstSample
+namespace EFCodeFirstSample.Infrastructure
 {
     public class AutoMapperProfile : Profile
     {

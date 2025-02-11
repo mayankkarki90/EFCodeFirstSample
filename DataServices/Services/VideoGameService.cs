@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using Data;
+﻿using Data;
 using DataContracts.Models;
 using DataContracts.Services;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 namespace DataServices.Services
 {
@@ -40,7 +33,7 @@ namespace DataServices.Services
 
         public async Task AddAsync(VideoGame videoGame)
         {
-            using (var transaction =  _dataContext.Database.BeginTransaction())
+            using (var transaction = _dataContext.Database.BeginTransaction())
             {
                 try
                 {
@@ -94,7 +87,7 @@ namespace DataServices.Services
                     videoGame.Name = newGame.Name;
                     videoGame.Details.Description = newGame.Details.Description;
                     videoGame.Details.ReleaseDate = newGame.Details.ReleaseDate;
-                    
+
                     await _dataContext.SaveChangesAsync();
                     await transaction.CommitAsync();
                 }

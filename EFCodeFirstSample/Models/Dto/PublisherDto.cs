@@ -1,4 +1,4 @@
-﻿namespace EFCodeFirstSample.Dto
+﻿namespace EFCodeFirstSample.Models.Dto
 {
     public class PublisherDto
     {

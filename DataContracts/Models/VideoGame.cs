@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DataContracts.Models
+﻿namespace DataContracts.Models
 {
     public class VideoGame
     {
@@ -20,6 +14,6 @@ namespace DataContracts.Models
 
         public VideoGameDetail Details { get; set; }
 
-        public List<Genre> Genres{ get; set; }
+        public List<Genre> Genres { get; set; }
     }
 }
