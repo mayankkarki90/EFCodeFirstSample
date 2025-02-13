@@ -84,6 +84,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseLogContextMiddleware();
 app.UseSerilogRequestLogging();
 
 app.Run();

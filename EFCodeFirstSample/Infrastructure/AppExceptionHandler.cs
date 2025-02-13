@@ -17,8 +17,8 @@ namespace EFCodeFirstSample.Infrastructure
         {
             var response = new ErrorResponse
             {
-                ErrorMessage = exception.Message,
-                TrackingId = "" //
+                ErrorMessage = exception.InnerException?.Message ?? exception.Message,
+                CorrelationId = (string)(httpContext.Items[LogContextMiddleware.CorrelationIdIdentifier] ?? string.Empty)
             };
 
             await httpContext.Response.WriteAsJsonAsync(response, cancellationToken);

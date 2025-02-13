@@ -4,6 +4,6 @@
     {
         public string ErrorMessage { get; set; }
 
-        public string TrackingId { get; set; }
+        public string? CorrelationId { get; set; }
     }
 }
