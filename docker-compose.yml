@@ -1,0 +1,19 @@
+services:
+  efcodefirstsample:
+    image: ${DOCKER_REGISTRY-}efcodefirstsample
+    container_name: efcodefirstsampleapi
+    build:
+      context: .
+      dockerfile: EFCodeFirstSample/Dockerfile
+    ports:
+      - "8080"
+      - "8081"
+
+  api.database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: api.database
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=sapass@123
+    ports:
+      - 1433:1433

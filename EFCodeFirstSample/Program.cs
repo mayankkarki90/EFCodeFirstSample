@@ -75,6 +75,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+
+    await using var serviceScope = app.Services.CreateAsyncScope();
+    await using var dataContext = serviceScope.ServiceProvider.GetRequiredService<DataContext>();
+    dataContext.Database.Migrate();
 }
 
 app.UseExceptionHandler(_ => { });//doesn't required any parameter to run using IExceptionHandler in .net 8

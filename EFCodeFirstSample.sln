@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataServices", "DataService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{470B7587-8C76-467C-B43A-CBADC518B333}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9714A7F7-A062-4812-8295-B3087BC19961}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{470B7587-8C76-467C-B43A-CBADC518B333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{470B7587-8C76-467C-B43A-CBADC518B333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{470B7587-8C76-467C-B43A-CBADC518B333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9714A7F7-A062-4812-8295-B3087BC19961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9714A7F7-A062-4812-8295-B3087BC19961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9714A7F7-A062-4812-8295-B3087BC19961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9714A7F7-A062-4812-8295-B3087BC19961}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
