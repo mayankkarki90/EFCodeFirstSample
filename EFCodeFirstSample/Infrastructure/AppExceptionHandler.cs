@@ -9,6 +9,13 @@ namespace EFCodeFirstSample.Infrastructure
     /// <seealso cref="Microsoft.AspNetCore.Diagnostics.IExceptionHandler" />
     public class AppExceptionHandler : IExceptionHandler
     {
+        private readonly ILogger<AppExceptionHandler> _logger;
+
+        public AppExceptionHandler(ILogger<AppExceptionHandler> logger)
+        {
+            _logger = logger;
+        }
+
         /// <summary>
         /// Tries to handle the specified exception asynchronously within the ASP.NET Core pipeline.
         /// Implementations of this method can provide custom exception-handling logic for different scenarios.
@@ -21,6 +28,9 @@ namespace EFCodeFirstSample.Infrastructure
                 CorrelationId = (string)(httpContext.Items[LogContextMiddleware.CorrelationIdIdentifier] ?? string.Empty)
             };
 
+            //Log an error message and push Message as a property for Serilog, if use @ then json data will be shown as structured
+            _logger.LogError(exception, "Exception occurred : {Message}", response.ErrorMessage);
+            
             await httpContext.Response.WriteAsJsonAsync(response, cancellationToken);
             return true;
         }
